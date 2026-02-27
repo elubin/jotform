@@ -5,54 +5,7 @@
 </head>
 <body>
     This is EAL field in an iframe - hidden on the jot page
-    <br />
-    Type an id 1 or 2 and hit tab to leave the field
-    <input type="text" id="userInput" placeholder="Enter ID here..." style="width:90%; padding:8px;">
-
     <script type="text/javascript">
-        const input = document.getElementById('userInput');
-        
-
-        input.addEventListener('blur', function () {
-            console.log("EAL: listenging");
-            const val = input.value;
-            if(!val) return;
-            console.log("EAL: read id ", val);
-
-            //JFCustomWidget.sendValueToParent('typeA9', `you picked id {val}`);
-            //JFCustomWidget.setFieldValue('typeA9',  `you picked id {val}`);
-
-            fillJotformField('typeA9', 'Erik was here');
-
-            //JFCustomWidget.setFieldsValueById('typeA9',  `you picked id`);
-JFCustomWidget.setFieldsValueById('input_9',  `you set by id input_9`);
-
-                
-
-            //// 1. TALK TO YOUR WEB SERVICE
-            //fetch('https://your-api-service.com/lookup', {
-            //    method: 'POST',
-            //    headers: { 'Content-Type': 'application/json' },
-            //    body: JSON.stringify({ id: val })
-            //})
-            //.then(response => response.json())
-            //.then(data => {
-            //    status.innerText = "Verified!";
-
-            //    // 2. SEND DATA TO JOTFORM
-            //    // This value is what gets stored in the Jotform database
-            //    JFCustomWidget.sendData({ value: data.result });
-
-            //    // 3. OPTIONAL: TELLING JOTFORM THE WIDGET IS "DONE"
-            //    JFCustomWidget.subscribe("submit", function() {
-            //        JFCustomWidget.sendSubmit({ valid: true, value: data.result });
-            //    });
-            //})
-            //.catch(err => {
-            //    status.innerText = "Error contacting service.";
-            //    console.error(err);
-            //});
-        });
 
         // Initialize the widget, but only if the Jotform API is available
         if (window.JFCustomWidget) {
@@ -63,20 +16,37 @@ JFCustomWidget.setFieldsValueById('input_9',  `you set by id input_9`);
             console.warn("JFCustomWidget is not defined. Running outside of Jotform widget environment?");
         }
 
-        // Force the library to start looking for the parent
-        JFCustomWidget.init();
 
-        function fillJotformField(uniqueName, value) {
-            const payload = {
-                action: 'setFieldValue',
-                fieldID: uniqueName,
-                value: value
-            };
-            
-            // XD.postMessage(stringified_payload, target_origin, parent_window)
-            // We use "*" for the origin to ensure it hits the Jotform parent
-            XD.postMessage(JSON.stringify(payload), "*", parent);
-        }
+        // 1. Function to send data to any field in the main form
+function sendToJotform(fieldID, value) {
+    console.log("Attempting to set field " + fieldID + " to: " + value);
+    
+    const message = {
+        action: 'setFieldValue',
+        fieldID: fieldID, // The 'Unique Name' or 'ID' of the field
+        value: value
+    };
+
+    // We send the message to the parent window (Jotform)
+    // The "*" allows it to be received by the parent form securely
+    window.parent.postMessage(message, "*");
+}
+
+// 2. Your actual logic
+document.getElementById('userInput').addEventListener('change', function() {
+    const val = this.value;
+    
+    // Simulate your API call or logic
+    console.log("Input changed to: " + val);
+
+    // TARGET THE ADDRESS FIELDS
+    // Replace 'address_city' with your actual Unique Name + _city
+    sendToJotform('typeA9', '1111111111');
+    sendToJotform('input_9', '22222222222');
+    sendToJotform('#input_9', '333333333');
+});
+        
+        
 
     </script>
 </body>
