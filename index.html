@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https//js.jotform.com/JOTFORM_WIDGET_API.js"></script>
+</head>
+<body>
+    This is EAL field in an iframe - hidden on the jot page
+    <br />
+    Type an id 1 or 2 and hit tab to leave the field
+    <input type="text" id="userInput" placeholder="Enter ID here..." style="width:90%; padding:8px;">
+
+    <script type="text/javascript">
+        const input = document.getElementById('userInput');
+
+        input.addEventListener('blur', function () {
+            console.log("EAL: listenging");
+            const val = input.value;
+            if(!val) return;
+            console.log("EAL: read id ", val);
+
+
+
+            //// 1. TALK TO YOUR WEB SERVICE
+            //fetch('https://your-api-service.com/lookup', {
+            //    method: 'POST',
+            //    headers: { 'Content-Type': 'application/json' },
+            //    body: JSON.stringify({ id: val })
+            //})
+            //.then(response => response.json())
+            //.then(data => {
+            //    status.innerText = "Verified!";
+
+            //    // 2. SEND DATA TO JOTFORM
+            //    // This value is what gets stored in the Jotform database
+            //    JFCustomWidget.sendData({ value: data.result });
+
+            //    // 3. OPTIONAL: TELLING JOTFORM THE WIDGET IS "DONE"
+            //    JFCustomWidget.subscribe("submit", function() {
+            //        JFCustomWidget.sendSubmit({ valid: true, value: data.result });
+            //    });
+            //})
+            //.catch(err => {
+            //    status.innerText = "Error contacting service.";
+            //    console.error(err);
+            //});
+        });
+
+        // Initialize the widget, but only if the Jotform API is available
+        if (window.JFCustomWidget) {
+            JFCustomWidget.subscribe("ready", function() {
+                console.log("Widget is ready and talking to Jotform!");
+            });
+        } else {
+            console.warn("JFCustomWidget is not defined. Running outside of Jotform widget environment?");
+        }
+    </script>
+</body>
+</html>
