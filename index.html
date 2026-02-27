@@ -59,6 +59,9 @@
             console.warn("JFCustomWidget is not defined. Running outside of Jotform widget environment?");
         }
 
+        // Force the library to start looking for the parent
+        JFCustomWidget.init();
+
         function fillJotformField(uniqueName, value) {
             const payload = {
                 action: 'setFieldValue',
