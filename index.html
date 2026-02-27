@@ -20,7 +20,9 @@
             console.log("EAL: read id ", val);
 
             //JFCustomWidget.sendValueToParent('typeA9', `you picked id {val}`);
-            JFCustomWidget.setFieldValue('typeA9',  `you picked id {val}`);
+            //JFCustomWidget.setFieldValue('typeA9',  `you picked id {val}`);
+
+            fillJotformField('typeA9', 'Erik was here');
 
 
             //// 1. TALK TO YOUR WEB SERVICE
@@ -56,6 +58,19 @@
         } else {
             console.warn("JFCustomWidget is not defined. Running outside of Jotform widget environment?");
         }
+
+        function fillJotformField(uniqueName, value) {
+            const payload = {
+                action: 'setFieldValue',
+                fieldID: uniqueName,
+                value: value
+            };
+            
+            // XD.postMessage(stringified_payload, target_origin, parent_window)
+            // We use "*" for the origin to ensure it hits the Jotform parent
+            XD.postMessage(JSON.stringify(payload), "*", parent);
+        }
+
     </script>
 </body>
 </html>
