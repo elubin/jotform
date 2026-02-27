@@ -30,21 +30,28 @@ function sendToJotform(fieldID, value) {
 
     // We send the message to the parent window (Jotform)
     // The "*" allows it to be received by the parent form securely
-    message.value = value + " ~ a";
-    window.parent.postMessage(message, "*");
-    JFCustomWidget.sendData(message);
+    //message.value = value + " ~ a";
+    //window.parent.postMessage(message, "*");
+    //JFCustomWidget.sendData(message);
 
-    message.value = value + " ~ b";
-    window.top.postMessage(message, "*");
-    JFCustomWidget.sendData(message);
+    //message.value = value + " ~ b";
+    //window.top.postMessage(message, "*");
+    //JFCustomWidget.sendData(message);
 
-    message.value = value + " ~ c";
-    window.parent.postMessage(message, "https://form.jotform.com");
-    JFCustomWidget.sendData(message);
+    //message.value = value + " ~ c";
+    //window.parent.postMessage(message, "https://form.jotform.com");
+    //JFCustomWidget.sendData(message);
 
-    message.value = value + " ~ d";
-    window.top.postMessage(message, "https://form.jotform.com");
-    JFCustomWidget.sendData(message);
+    //message.value = value + " ~ d";
+    //window.top.postMessage(message, "https://form.jotform.com");
+    //JFCustomWidget.sendData(message);
+
+    window.parent.postMessage({action: 'setFieldValue', field: fieldID, value: value+ " ~ a"}, '*')
+    window.parent.postMessage(JSON.stringify({action: 'setFieldValue', field: fieldID, value: value+ " ~ b"}), '*')
+    window.parent.postMessage({ type: 'setFieldValue', data: { name: fieldID, value: value+ " ~ c" } });
+    window.top.postMessage({action: 'setFieldValue', field: fieldID, value: value+ " ~ d"}, '*')
+    window.top.postMessage(JSON.stringify({action: 'setFieldValue', field: fieldID, value: value+ " ~ e"}), '*')
+    window.top.postMessage({ type: 'setFieldValue', data: { name: fieldID, value: value+ " ~ f" } });
 
 }
 
