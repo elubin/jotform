@@ -56,7 +56,48 @@ function sendToJotform(fieldID, value) {
     JFCustomWidget.sendData({action: 'setFieldValue', field: fieldID, value: value+ " ~ w"})
     JFCustomWidget.sendData(JSON.stringify({action: 'setFieldValue', field: fieldID, value: value+ " ~ x"})
     JFCustomWidget.sendData({ type: 'setFieldValue', data: { name: fieldID, value: value+ " ~ y" } })
-    
+
+    const payload = JSON.stringify({    action: 'setFieldValue',    name: 'q9_typeA9',    value: '12345'});
+    document.getElementById('260568036410048').contentWindow.postMessage(payload, '*');
+
+    window.postMessage({
+    type: 'setFieldValue', // Try 'type' instead of 'action'
+    property: 'q9_typeA9',
+    value: '12333345',
+    formID: '260568036410048' // Security validation}, '*');
+    window.parent.postMessage({
+    type: 'setFieldValue', // Try 'type' instead of 'action'
+    property: 'q9_typeA9',
+    value: '1235542345',
+    formID: '260568036410048' // Security validation}, '*');
+    window.top.postMessage({
+    type: 'setFieldValue', // Try 'type' instead of 'action'
+    property: 'q9_typeA9',
+    value: '1231f3345',
+    formID: '260568036410048' // Security validation}, '*');
+
+        window.parent.postMessage({
+    action: 'customWidgetData',
+    qid: '9', // The ID of the widget field in your source
+    data: {
+        target: 'q9_typeA9',
+        value: '12343vfddcce4f5'
+    }
+}, '*');        window.postMessage({
+    action: 'customWidgetData',
+    qid: '9', // The ID of the widget field in your source
+    data: {
+        target: 'q9_typeA9',
+        value: '12343vbnbbbfe4f5'
+    }
+}, '*');        window.top.postMessage({
+    action: 'customWidgetData',
+    qid: '9', // The ID of the widget field in your source
+    data: {
+        target: 'q9_typeA9',
+        value: '12343vaaafe4f5'
+    }
+}, '*');
 }
 
 // 2. Your actual logic
