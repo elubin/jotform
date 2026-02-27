@@ -61,38 +61,44 @@ function sendToJotform(fieldID, value) {
     document.getElementById('260568036410048').contentWindow.postMessage(payload, '*');
 
     window.postMessage({
-    type: 'setFieldValue', // Try 'type' instead of 'action'
+    type: 'setFieldValue',
     property: 'q9_typeA9',
     value: '12333345',
-    formID: '260568036410048' // Security validation}, '*');
+    formID: '260568036410048'}, '*');
+        
     window.parent.postMessage({
     type: 'setFieldValue', // Try 'type' instead of 'action'
     property: 'q9_typeA9',
     value: '1235542345',
-    formID: '260568036410048' // Security validation}, '*');
+    formID: '260568036410048' }, '*');
+        
     window.top.postMessage({
-    type: 'setFieldValue', // Try 'type' instead of 'action'
+    type: 'setFieldValue', 
     property: 'q9_typeA9',
     value: '1231f3345',
-    formID: '260568036410048' // Security validation}, '*');
+    formID: '260568036410048'}, '*');
 
         window.parent.postMessage({
     action: 'customWidgetData',
-    qid: '9', // The ID of the widget field in your source
+    qid: '9', 
     data: {
         target: 'q9_typeA9',
         value: '12343vfddcce4f5'
     }
-}, '*');        window.postMessage({
+}, '*');    
+    
+    window.postMessage({
     action: 'customWidgetData',
-    qid: '9', // The ID of the widget field in your source
+    qid: '9',
     data: {
         target: 'q9_typeA9',
         value: '12343vbnbbbfe4f5'
     }
-}, '*');        window.top.postMessage({
+}, '*');    
+    
+    window.top.postMessage({
     action: 'customWidgetData',
-    qid: '9', // The ID of the widget field in your source
+    qid: '9',
     data: {
         target: 'q9_typeA9',
         value: '12343vaaafe4f5'
