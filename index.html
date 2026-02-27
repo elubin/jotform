@@ -53,6 +53,10 @@ function sendToJotform(fieldID, value) {
     window.top.postMessage(JSON.stringify({action: 'setFieldValue', field: fieldID, value: value+ " ~ e"}), '*')
     window.top.postMessage({ type: 'setFieldValue', data: { name: fieldID, value: value+ " ~ f" } });
 
+    JFCustomWidget.sendData({action: 'setFieldValue', field: fieldID, value: value+ " ~ w"})
+    JFCustomWidget.sendData(JSON.stringify({action: 'setFieldValue', field: fieldID, value: value+ " ~ x"})
+    JFCustomWidget.sendData({ type: 'setFieldValue', data: { name: fieldID, value: value+ " ~ y" } })
+    
 }
 
 // 2. Your actual logic
