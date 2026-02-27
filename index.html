@@ -60,7 +60,7 @@ function sendToJotform(fieldID, value) {
     try {
     const payload = JSON.stringify({    action: 'setFieldValue',    name: 'q9_typeA9',    value: '12345'});
     document.getElementById('260568036410048').contentWindow.postMessage(payload, '*');
-    } catch() {
+    } catch(e) {
     }
 
     window.postMessage({
