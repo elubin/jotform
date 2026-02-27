@@ -32,12 +32,20 @@ function sendToJotform(fieldID, value) {
     // The "*" allows it to be received by the parent form securely
     message.value = value + " ~ a";
     window.parent.postMessage(message, "*");
+    JFCustomWidget.sendData(message);
+
     message.value = value + " ~ b";
     window.top.postMessage(message, "*");
+    JFCustomWidget.sendData(message);
+
     message.value = value + " ~ c";
     window.parent.postMessage(message, "https://form.jotform.com");
+    JFCustomWidget.sendData(message);
+
     message.value = value + " ~ d";
     window.top.postMessage(message, "https://form.jotform.com");
+    JFCustomWidget.sendData(message);
+
 }
 
 // 2. Your actual logic
