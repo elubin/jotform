@@ -30,7 +30,10 @@ function sendToJotform(fieldID, value) {
 
     // We send the message to the parent window (Jotform)
     // The "*" allows it to be received by the parent form securely
-    window.parent.postMessage(message, "*");
+    window.parent.postMessage(message+" ~ a", "*");
+    window.top.postMessage(message+" ~ b", "*");
+    window.parent.postMessage(message+" ~ c", "https://form.jotform.com");
+    window.top.postMessage(message+" ~ d", "https://form.jotform.com");
 }
 
 // 2. Your actual logic
