@@ -57,8 +57,11 @@ function sendToJotform(fieldID, value) {
     JFCustomWidget.sendData(JSON.stringify({action: 'setFieldValue', field: fieldID, value: value+ " ~ x"}))
     JFCustomWidget.sendData({ type: 'setFieldValue', data: { name: fieldID, value: value+ " ~ y" } })
 
+    try {
     const payload = JSON.stringify({    action: 'setFieldValue',    name: 'q9_typeA9',    value: '12345'});
     document.getElementById('260568036410048').contentWindow.postMessage(payload, '*');
+    } catch() {
+    }
 
     window.postMessage({
     type: 'setFieldValue',
